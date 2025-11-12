@@ -1,4 +1,4 @@
-/* ------------------ Papazitos Login/Cadastro ------------------ */
+
 :root {
   --bg: #fff;
   --card: #fff7ef;
@@ -26,7 +26,7 @@ body, html {
   color: var(--text);
 }
 
-/* Layout principal */
+
 body {
   display: flex;
   justify-content: center;
@@ -35,7 +35,7 @@ body {
   background: linear-gradient(135deg, #fff7ef 0%, #ffe4d1 100%);
 }
 
-/* Caixa centralizada */
+
 .center-card {
   background: var(--card);
   border-radius: var(--radius);
@@ -50,7 +50,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
-/* Tipografia */
+
 h1 {
   color: var(--primary);
   font-size: 2.2rem;
@@ -237,4 +237,38 @@ section {
 
 .pedido-linha .btn {
   margin-right: 8px;
+}
+
+.rest-card-js {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.produto-card-js {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.produto-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

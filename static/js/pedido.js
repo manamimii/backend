@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const div = document.getElementById("pedidoStatus");
 
     async function carregarPedido() {
-        const resp = await fetch("pedidos/recebidos", {
+        const resp = await fetch("/pedidos/recebidos", {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
                 credentials: 'include'
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        const etapas = ["aguardando", "em_preparo", "pronto", "entregue"];
+        const etapas = ["recebido", "em_preparo", "saiu_para_entrega", "entregue"];
         const indice = etapas.indexOf(pedido.status);
 
         let progresso = etapas.map((etapa, i) => {

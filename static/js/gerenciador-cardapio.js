@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", carregarPedidos);
 
 async function carregarPedidos() {
     try {
-        const resp = await fetch("/api/pedidos/recebidos");
+        const resp = await fetch("/api/pedidos/restaurante");
 
         if (!resp.ok) {
             throw new Error("Erro ao carregar pedidos. Código: " + resp.status);
@@ -25,7 +25,7 @@ async function carregarPedidos() {
                 <p><strong>Cliente:</strong> ${p.cliente || "Desconhecido"}</p>
                 <p><strong>Status:</strong> ${p.status || "Indefinido"}</p>
                 <div class="btn-group">
-                    <button class="btn" onclick="mudarStatus(${p.id}, 'em_preparo')">Iniciar Preparo</button>
+                    <button class="btn" onclick="mudarStatus(${p.id}, 'saiu_para_entrega')">Saiu para Entrega</button>
                     <button class="btn" onclick="mudarStatus(${p.id}, 'pronto')">Marcar Pronto</button>
                     <button class="btn success" onclick="mudarStatus(${p.id}, 'entregue')">Entregar</button>
                 </div>
@@ -42,7 +42,7 @@ async function carregarPedidos() {
 
 async function mudarStatus(id, status) {
     try {
-        const resp = await fetch(`/api/pedido/${id}/status`, {
+        const resp = await fetch(`/api/pedidos/${id}/status`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status })

@@ -1,16 +1,16 @@
-// Variáveis globais
+
 let carrinho = [];
 let restauranteSelecionado = null;
 
-// Carregar dados ao iniciar
+
 document.addEventListener('DOMContentLoaded', async function() {
-  // Verificar login
+  
   const userName = document.getElementById('userName');
   if (userName) {
-    userName.textContent = 'Usuário'; // Será atualizado pela sessão
+    userName.textContent = 'Usuário'; 
   }
 
-  // Botão de logout
+ 
   const btnLogout = document.getElementById('btnLogout');
   if (btnLogout) {
     btnLogout.addEventListener('click', async function() {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
   }
 
-  // Botão do carrinho
+  
   const btnCarrinho = document.getElementById('btnCarrinho');
   if (btnCarrinho) {
     btnCarrinho.addEventListener('click', function() {
@@ -27,14 +27,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
   }
 
-  // Carregar carrinho do localStorage
+  
   carregarCarrinhoDoStorage();
   
-  // Carregar restaurantes
+  
   await carregarRestaurantes();
 });
 
-// Carregar carrinho do localStorage
+
 function carregarCarrinhoDoStorage() {
   const carrinhoSalvo = localStorage.getItem('carrinho');
   if (carrinhoSalvo) {
@@ -47,28 +47,27 @@ function carregarCarrinhoDoStorage() {
   atualizarContadorCarrinho();
 }
 
-// Salvar carrinho no localStorage
+
 function salvarCarrinhoNoStorage() {
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   atualizarContadorCarrinho();
 }
 
-// Atualizar contador do carrinho
+
 function atualizarContadorCarrinho() {
   const qtdElement = document.getElementById('carrinhoQtd');
   if (qtdElement) {
-    const total = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
-    qtdElement.textContent = total;
+    const total = carrinho.reduce((sum, item) => sum + (Number(item.quantidade) || 0), 0);
   }
 }
 
-// Carregar lista de restaurantes
+
 async function carregarRestaurantes() {
   try {
     const response = await fetch('/api/produtos');
     const produtos = await response.json();
     
-    // Agrupar produtos por restaurante
+    
     const restaurantesMap = {};
     produtos.forEach(produto => {
       if (!restaurantesMap[produto.restaurante_id]) {
@@ -106,7 +105,7 @@ function mostrarRestaurantes(restaurantes) {
 
   restaurantes.forEach(rest => {
     const card = document.createElement('article');
-    card.className = 'rest-card';
+    card.className = 'rest-card-js';
     card.style.cssText = `
       background: white;
       padding: 20px;
@@ -174,7 +173,7 @@ async function verCardapio(restauranteId, restauranteNome) {
   }
 }
 
-// Mostrar produtos do restaurante
+
 function mostrarProdutos(produtos) {
   const lista = document.getElementById('produtosList');
   if (!lista) return;
@@ -187,20 +186,12 @@ function mostrarProdutos(produtos) {
   }
   
   produtos.forEach(produto => {
-    if (!produto.disponivel) return; // Pular produtos indisponíveis
+    if (!produto.disponivel) return; 
     
     const div = document.createElement('div');
     div.className = 'produto-card';
-    div.style.cssText = `
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    `;
+    
+  
     
     div.innerHTML = `
       <div>
@@ -225,9 +216,9 @@ function mostrarProdutos(produtos) {
   });
 }
 
-// Adicionar produto ao carrinho
+
 function adicionarAoCarrinho(produtoId, produtoNome, produtoPreco, restauranteId) {
-  // Verificar se já existe no carrinho
+ 
   const itemExistente = carrinho.find(item => item.id === produtoId);
   
   if (itemExistente) {
@@ -245,11 +236,11 @@ function adicionarAoCarrinho(produtoId, produtoNome, produtoPreco, restauranteId
   salvarCarrinhoNoStorage();
   mostrarResumoCarrinho();
   
-  // Feedback visual
+  
   alert(`${produtoNome} adicionado ao carrinho!`);
 }
 
-// Mostrar resumo do carrinho
+
 function mostrarResumoCarrinho() {
   const resumo = document.getElementById('carrinhoResumo');
   if (!resumo) return;
@@ -308,22 +299,22 @@ function mostrarCarrinho() {
     return;
   }
   
-  // Se estiver na tela de restaurantes, ir para finalizar
+  
   window.location.href = '/finalizar-pedido';
 }
 
-// Finalizar pedido
+
 function finalizarPedido() {
   if (carrinho.length === 0) {
     alert('Adicione produtos ao carrinho antes de finalizar!');
     return;
   }
   
-  // Redirecionar para página de finalização
+  
   window.location.href = '/finalizar-pedido';
 }
 
-// Voltar para lista de restaurantes
+
 function voltarParaRestaurantes() {
   const secaoCardapio = document.getElementById('rest-cardapio');
   if (secaoCardapio) {
