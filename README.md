@@ -39,8 +39,8 @@ pip (gerenciador de pacotes do Python)
 
 Bash
 
-git clone https://seu-link-para-o-repositorio.git
-cd nome-da-pasta-do-projeto
+git clone https://github.com/manamimii/papazitos_delivery.git
+
 2. Crie e ative um ambiente virtual (Recomendado):
 
 No Windows (PowerShell):
